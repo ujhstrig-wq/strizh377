@@ -1,0 +1,202 @@
+#cfp_overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+#cfp_panel {
+    display: flex;
+    flex-direction: column;
+    width: min(760px, 96vw);
+    height: min(86vh, 900px);
+    background: var(--SmartThemeBlurTintColor);
+    color: var(--SmartThemeBodyColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.cfp_header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--SmartThemeBorderColor);
+}
+
+.cfp_title {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#cfp_search {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+
+.cfp_close {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+#cfp_list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+/* ── строки / папки ── */
+
+.cfp_row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.cfp_row:hover {
+    background: color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
+}
+
+.cfp_caret {
+    width: 12px;
+    font-size: 0.75em;
+    opacity: 0.7;
+    transition: transform 0.15s ease;
+}
+
+.cfp_folder.open > .cfp_row > .cfp_caret {
+    transform: rotate(90deg);
+}
+
+.cfp_ava {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.cfp_ava_small {
+    width: 24px;
+    height: 24px;
+}
+
+.cfp_folder_icon {
+    width: 24px;
+    text-align: center;
+    color: var(--SmartThemeQuoteColor);
+}
+
+.cfp_name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cfp_char_head .cfp_name {
+    font-weight: 600;
+}
+
+.cfp_badge {
+    flex-shrink: 0;
+    padding: 0 8px;
+    font-size: 0.8em;
+    line-height: 1.6;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--SmartThemeBodyColor) 15%, transparent);
+}
+
+.cfp_refresh {
+    flex-shrink: 0;
+    padding: 4px;
+    opacity: 0.6;
+}
+
+.cfp_refresh:hover {
+    opacity: 1;
+}
+
+.cfp_children {
+    margin-left: 18px;
+    padding-left: 8px;
+    border-left: 1px solid var(--SmartThemeBorderColor);
+}
+
+/* ── чаты ── */
+
+.cfp_chat {
+    align-items: flex-start;
+}
+
+.cfp_chat_icon {
+    margin-top: 4px;
+    opacity: 0.7;
+}
+
+.cfp_chat_body {
+    flex: 1;
+    min-width: 0;
+}
+
+.cfp_chat_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cfp_chat_meta {
+    font-size: 0.8em;
+    opacity: 0.65;
+}
+
+.cfp_chat_preview {
+    margin-top: 2px;
+    font-size: 0.85em;
+    opacity: 0.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cfp_chat.current {
+    background: color-mix(in srgb, var(--SmartThemeQuoteColor) 22%, transparent);
+    outline: 1px solid var(--SmartThemeQuoteColor);
+}
+
+.cfp_info {
+    padding: 8px 10px;
+    opacity: 0.7;
+    font-size: 0.9em;
+}
+
+.cfp_error {
+    color: #e66;
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    #cfp_panel {
+        width: 100vw;
+        height: 100dvh;
+        border-radius: 0;
+    }
+
+    .cfp_title span {
+        display: none;
+    }
+}

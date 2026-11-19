@@ -1,0 +1,11 @@
+{
+    "display_name": "Chat Folders by Persona",
+    "loading_order": 50,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Claude",
+    "version": "1.0.0",
+    "homePage": ""
+}
