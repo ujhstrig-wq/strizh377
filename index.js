@@ -499,6 +499,17 @@ function render() {
 
 /* ───────────────────────── Панель ───────────────────────── */
 
+/** Подгоняет оверлей под реально видимую область (важно для мобильных браузеров и клавиатуры) */
+function syncViewport() {
+    const overlay = document.getElementById('cfp_overlay');
+    const vv = window.visualViewport;
+    if (!overlay || !vv) return;
+    overlay.style.top = `${vv.offsetTop}px`;
+    overlay.style.left = `${vv.offsetLeft}px`;
+    overlay.style.width = `${vv.width}px`;
+    overlay.style.height = `${vv.height}px`;
+}
+
 function openPanel() {
     if (state.open) return;
     state.open = true;
@@ -531,6 +542,9 @@ function openPanel() {
     );
     document.body.append(overlay);
     document.addEventListener('keydown', onKeyDown);
+    syncViewport();
+    window.visualViewport?.addEventListener('resize', syncViewport);
+    window.visualViewport?.addEventListener('scroll', syncViewport);
 
     // Автоматически раскрываем текущего бота и папку персоны текущего чата
     const cur = currentCharacter();
@@ -547,7 +561,10 @@ function openPanel() {
     }
 
     render();
-    document.getElementById('cfp_search')?.focus();
+    // Автофокус только на ПК: на телефоне он открывает клавиатуру и ломает раскладку
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.getElementById('cfp_search')?.focus();
+    }
 }
 
 function closePanel() {
@@ -555,6 +572,8 @@ function closePanel() {
     state.query = '';
     document.getElementById('cfp_overlay')?.remove();
     document.removeEventListener('keydown', onKeyDown);
+    window.visualViewport?.removeEventListener('resize', syncViewport);
+    window.visualViewport?.removeEventListener('scroll', syncViewport);
 }
 
 function onKeyDown(e) {
